@@ -39,7 +39,7 @@ WORKDIR /app
 VOLUME /app/templates
 
 HEALTHCHECK --interval=1m --timeout=3s \
-  CMD curl --silent --fail http://localhost:${PORT}/ping || exit 1
+  CMD curl --silent --fail http://localhost:${PORT}/v1/ping || exit 1
 
 ENTRYPOINT [ "./go-wkhtmltox" ]
 CMD [ "run" ]
