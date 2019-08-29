@@ -8,6 +8,7 @@ RUN apt-get update -qq \
     apt-get install -yqq -o=Dpkg::Use-Pty=0 --no-install-recommends \
       git \
       wget \
+      curl \
  && mkdir -p /tmp/go \
     && cd /tmp/go \
     && wget -q https://storage.googleapis.com/golang/go1.9.1.linux-amd64.tar.gz \
@@ -25,7 +26,8 @@ RUN apt-get update -qq \
  && rm -rf /tmp/go/* \
     && rm -rf /usr/local/go \
     && rm -rf $GOPATH \
- && apt-get purge -y --auto-remove git wget \
+ && apt-get purge -y --auto-remove \
+      git wget \
  && rm -rf /var/lib/apt/lists/* \
  && apt-get clean -yqq
 
@@ -34,6 +36,9 @@ EXPOSE ${PORT}
 WORKDIR /app
 
 VOLUME /app/templates
+
+HEALTHCHECK --interval=1m --timeout=3s \
+  CMD curl --silent --fail http://localhost:${PORT}/ping || exit 1
 
 ENTRYPOINT [ "./go-wkhtmltox" ]
 CMD [ "run" ]
