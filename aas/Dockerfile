@@ -1,6 +1,7 @@
 FROM sbitio/wkhtmltox:latest
 
-ENV PORT=8080
+ENV PORT=8080 \
+    GO_VERSION=1.12.9
 
 # Install golang and Install go-wkhtmltox
 RUN apt-get update -qq \
@@ -11,8 +12,8 @@ RUN apt-get update -qq \
       curl \
  && mkdir -p /tmp/go \
     && cd /tmp/go \
-    && wget -q https://storage.googleapis.com/golang/go1.9.1.linux-amd64.tar.gz \
-      && tar -C /usr/local -xzf  go1.9.1.linux-amd64.tar.gz \
+    && wget -q https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz \
+      && tar -C /usr/local -xzf  go${GO_VERSION}.linux-amd64.tar.gz \
     && mkdir -p $HOME/go \
       && export GOPATH=$HOME/go \
     && export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin \
