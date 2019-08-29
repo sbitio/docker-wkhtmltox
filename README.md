@@ -19,7 +19,25 @@ the output.
 
 ## Using as a service
 
-We leverage [gogap/go-wkhtmltox](https://github.com/gogap/go-wkhtmltox/) to provide an as-a-service container on tag aas-latest.
+We leverage [gogap/go-wkhtmltox](https://github.com/gogap/go-wkhtmltox/) to provide an as-a-service container on tag aas-latest:
+
+```sh
+docker run -d --name wkhtmltox sbitio/wkhtmltox:aas-latest
+curl -s -X POST \
+  "http://$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' wkhtmltox):8080/v1/convert" \
+  -H 'accept-encoding: gzip' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -d '{
+    "to" : "image",
+    "converter":{
+      "uri": "https://sbit.io"
+    },
+	  "template": "binary"
+  }' --compressed -o sbit.jpg
+docker stop wkhtmltox
+docker rm wkhtmltox
+```
 
 ## Authors and Contributors
 
