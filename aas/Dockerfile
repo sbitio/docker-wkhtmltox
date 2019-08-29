@@ -1,5 +1,7 @@
 FROM sbitio/wkhtmltox:latest
 
+ENV PORT=8080
+
 # Install golang and Install go-wkhtmltox
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive \
@@ -27,8 +29,11 @@ RUN apt-get update -qq \
  && rm -rf /var/lib/apt/lists/* \
  && apt-get clean -yqq
 
+EXPOSE ${PORT}
+
 WORKDIR /app
 
 VOLUME /app/templates
 
-CMD ["./go-wkhtmltox"]
+ENTRYPOINT [ "./go-wkhtmltox" ]
+CMD [ "run" ]
