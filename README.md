@@ -22,7 +22,7 @@ the output.
 We leverage [gogap/go-wkhtmltox](https://github.com/gogap/go-wkhtmltox/) to provide an as-a-service container on tag aas-latest:
 
 ```sh
-docker run -d --name wkhtmltox sbitio/wkhtmltox:aas-latest
+docker run -d --rm --name wkhtmltox sbitio/wkhtmltox:aas-latest
 curl -s -X POST \
   "http://$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' wkhtmltox):8080/v1/convert" \
   -H 'accept-encoding: gzip' \
@@ -36,7 +36,6 @@ curl -s -X POST \
 	  "template": "binary"
   }' --compressed -o sbit.jpg
 docker stop wkhtmltox
-docker rm wkhtmltox
 ```
 
 ## Authors and Contributors
