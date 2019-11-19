@@ -1,5 +1,7 @@
 # docker-wkhtmltox
 
+[![DockerHub Badge](http://dockeri.co/image/sbitio/wkhtmltox)](https://hub.docker.com/r/sbitio/wkhtmltox/)
+
 This docker container lets you run wkhtmltopdf in a docker container.
 
 ## Building the image
