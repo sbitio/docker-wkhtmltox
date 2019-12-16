@@ -13,7 +13,7 @@ docker build .
 ## Using the image
 
 ```sh
-docker run -v <host_dir>:/tmp sbitio/wkhtmltopdf https://sbit.io /tmp/output.pdf
+docker run -v <host_dir>:/tmp sbitio/wkhtmltox https://sbit.io /tmp/output.pdf
 ```
 
 The mounted volume can be used to send local html files and to save
