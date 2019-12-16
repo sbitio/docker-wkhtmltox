@@ -13,7 +13,7 @@ docker build .
 ## Using the image
 
 ```sh
-docker run -v <host_dir>:/tmp sbitio/wkhtmltox https://sbit.io /tmp/output.pdf
+docker run -v $(pwd):/tmp sbitio/wkhtmltox https://sbit.io /tmp/output.pdf
 # For wkhtmltoimage:
 docker run -v $(pwd):/tmp --entrypoint wkhtmltoimage sbitio/wkhtmltox https://sbit.io /tmp/output.png
 ```
