@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd aas
+docker build --cache-from $IMAGE_NAME -t $DOCKER_REPO:aas-latest .
+docker push $DOCKER_REPO:aas-latest
+
+docker push $IMAGE_NAME
